@@ -6,6 +6,7 @@
 
 package prinston15;
 
+import static java.util.Arrays.sort;
 import java.util.Random;
 
 /**
@@ -32,7 +33,7 @@ public class QuickFindUF {
         int qid = id[q];
         for (int i = 0; i < id.length; i++)
             if (id[i] == pid) id[i] = qid;
-        count--;
+        count++;
             
     }
     
@@ -47,18 +48,34 @@ public class QuickFindUF {
     public static void main(String[] args) {
         int N = 30;
         QuickFindUF uf = new QuickFindUF(N);
-        int F = 30;
+        int F = 10;
         for (int i=0; i<F; i++) {
             Random generator = new Random();
-            int p = generator.nextInt(9);
-            StdOut.println(p);
-            int q = generator.nextInt(9);
-            StdOut.println(q);
-
+            /**
+             * Generate some connected 
+             * elements
+             * 
+             */
+            int p = generator.nextInt(30);
+            int q = generator.nextInt(30);
             if (uf.connected(p, q)) continue;
             uf.union(p, q);
-            StdOut.println(p + " " + q);
+            StdOut.print("(" + p + "," + q + ")");
+            for (int j=0; j<uf.id.length; j++) {
+                StdOut.print(uf.id[j] + ", ");
+            }
+            StdOut.println();
+            
         }
+
         StdOut.println(uf.count + " components.");
+        for (int j=0; j<uf.id.length; j++) {
+            StdOut.print(uf.id[j] + ", ");
+        }
+        sort(uf.id);
+        for (int j=0; j<uf.id.length; j++) {
+            StdOut.print(uf.id[j] + ", ");
+        }
+
     }
 }
